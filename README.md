@@ -59,3 +59,23 @@ if **fastqfile** is "-", then it reads from processs.stdin.
 other values in **params** is used for **fs.createReadStream(fastqfile, params)**
 
 for example, **highWaterMark** can be useful for performancd tuning.
+
+
+this.pause() and this.resume()
+---------------------
+are callable in "data" function
+
+```js
+var fqreader = require("fqreader");
+fqreader.read(filename, 
+  data: function(data) {
+    this.pause();
+
+    var _this = this
+    setTimeout(function() {
+      _this.resume();
+    }, 10);
+  }
+
+});
+```
