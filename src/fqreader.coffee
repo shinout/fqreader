@@ -3,9 +3,10 @@ fs = require "fs"
 module.exports = read: (filename, obj)->
   # input validation
   obj = {data: obj} if typeof obj is "function"
+  filename = process.stdin if filename is "-"
 
   throw new Error "required 'data' method in the secound argument, in fqreader.read()" if typeof obj.data isnt "function"
-  throw new Error "#{filename} : no such file" unless fs.existsSync(filename)
+  throw new Error "#{filename} : no such file" if not filename.readable and not fs.existsSync(filename)
 
   ondata = obj.data
   onend = obj.end
@@ -15,7 +16,7 @@ module.exports = read: (filename, obj)->
 
   # read
   readOption = obj
-  freader = fs.createReadStream filename, obj
+  freader = if filename.readable then filename else fs.createReadStream filename, obj
   freader.setEncoding "utf-8"
 
   reminder = ""
@@ -41,6 +42,8 @@ module.exports = read: (filename, obj)->
         seq  : lines[1]
         qual : lines[3]
     onend() if typeof onend is "function"
+
+  freader.resume()
 
 if require.main is module
   module.exports.read process.argv[2], (data)->

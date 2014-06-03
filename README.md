@@ -37,6 +37,12 @@ fqreader.read(filename,
 fqreader.read(fastqfile, params)
 -------------
 Reads file with its name **fastqfile** as fastq format.
+
+**fastqfile** is a filename or a readable stream like **process.stdin**.
+
+if **fastqfile** is "-", then it reads from processs.stdin.
+
+
 **params** is required, must be an object or a function.
 
 **params.data** is called for each fastq unit with **data**.
