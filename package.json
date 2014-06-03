@@ -1,6 +1,6 @@
 {
   "name": "fqreader",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "reads FASTQ files",
   "homepage": "http://github.com/shinout/fqreader",
   "author": "Shin Suzuki<shinout310@gmail.com>",

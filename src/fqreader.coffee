@@ -86,7 +86,7 @@ deepCopy = (val)->
   return val.map(deepCopy)  if Array.isArray(val)
   return val if typeof val isnt "object" or val is null or val is undefined
   ret = {}
-  ret[attr] = deepCopy val[attr] for attr in val when val.hasOwnProperty attr
+  ret[attr] = deepCopy v for attr,v of val when val.hasOwnProperty attr
   return ret
 
 timeoutError = ->
